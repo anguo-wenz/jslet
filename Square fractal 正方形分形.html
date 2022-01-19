@@ -1,0 +1,107 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Square Fractal 正方形分形</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <h1>quan</h1>
+
+颜色 Color： <input id="color" type="text" placeholder="black"/>&nbsp;&nbsp;
+几分点 Partial： <input id="part" type="text" placeholder="10"/>&nbsp;&nbsp;
+次数 Times： <input id="loop" type="text" placeholder="70"/>&nbsp;&nbsp;
+绘制间隔 Interval： <input id="interval" type="text" placeholder="70"/>ms &nbsp;&nbsp;&nbsp;&nbsp;<button id="button11" onclick="draw()">&nbsp;绘制&nbsp;</button>
+<br/>
+<br/>
+    <canvas id="canvas" height="1500" width="1500">
+    </canvas>
+    <script lang="javascript">
+	x1=100;
+	y1=100;
+	x2=100;
+	y2=1300;
+	x3=1300;
+	y3=1300;
+	x4=1300;
+	y4=100;
+	t=0;
+	canvas,ctx
+	function draw() {
+	if(x1==100&&y1==100){
+	color=document.getElementById('color').value;
+	if(!color)color="black";
+	k=document.getElementById('part').value;
+	if(!k)k=10;
+	max=document.getElementById('loop').value;
+	if(!max) max = 70;
+	interval=document.getElementById('interval').value;
+	if(!interval) interval = 70;
+	
+     canvas = document.querySelector('#canvas');
+
+    if (!canvas.getContext) {
+        return;
+    }
+     ctx = canvas.getContext('2d');
+	 ctx.clearRect(0, 0, canvas.width, canvas.height);
+	
+	}
+
+    // set line stroke and line width
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 1;
+
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.lineTo(x3, y3);
+    ctx.lineTo(x4, y4);
+    ctx.lineTo(x1, y1);
+	ctx.stroke();
+	
+	var x01=x1,x02=x2,x03=x3,x04=x4,y01=y1,y02=y2,y03=y3,y04=y4;
+	x1=((k-1)*x01+x02)/k;
+	x2=((k-1)*x02+x03)/k;
+	x3=((k-1)*x03+x04)/k;
+	x4=((k-1)*x04+x01)/k;
+	y1=((k-1)*y01+y02)/k;
+	y2=((k-1)*y02+y03)/k;
+	y3=((k-1)*y03+y04)/k;
+	y4=((k-1)*y04+y01)/k;
+    /*ctx.strokeStyle = 'black';
+    ctx.beginPath();
+    ctx.moveTo(x01, y01);
+    ctx.lineTo(x1, y1);
+    ctx.moveTo(x02, y02);
+    ctx.lineTo(x2, y2);
+    ctx.moveTo(x03, y03);
+    ctx.lineTo(x3, y3);
+    ctx.moveTo(x04, y04);
+    ctx.lineTo(x4, y4);
+	ctx.stroke();*/
+	
+	t=t+1;
+	if(t<max){
+setTimeout(
+"draw()", interval);
+}else{
+	x1=100;
+	y1=100;
+	x2=100;
+	y2=1300;
+	x3=1300;
+	y3=1300;
+	x4=1300;
+	y4=100;
+	t=0;
+}
+};
+
+
+</script>
+
+</body>
+</html>

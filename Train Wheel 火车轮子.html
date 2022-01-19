@@ -1,0 +1,119 @@
+  <html>
+  <head>
+  <meta charset=utf-8 />
+  <title>Train Wheel 火车轮子 运动轨迹</title>
+  </head>
+  <body onload="draw(0);">
+  <canvas id="circle" width="1500" height="600"></canvas>
+  </body>
+  <script>
+  function draw(time)
+  {
+var canvas = document.getElementById('circle');
+if (canvas.getContext)
+{
+  var ctx = canvas.getContext('2d'); 
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  var ri = 100;
+  var ro = 120;
+  
+  var X = ri+time;
+  var Y = ri+40;
+  
+  var r2 = ri;
+  //var r3 = ri/2;
+  var r4 = ro;
+  
+  ctx.beginPath();
+  ctx.arc(ri, Y, ro, 0, 2 * Math.PI, false);
+  ctx.lineWidth = 1;
+  ctx.strokeStyle = '#d0d0d0';
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.arc(ri, Y, ri, 0, 2 * Math.PI, false);
+  ctx.lineWidth = 1;
+  ctx.strokeStyle = '#d0d0d0';
+  ctx.stroke();
+  /*
+  ctx.beginPath();
+  ctx.arc(ri, Y, r3, 0, 2 * Math.PI, false);
+  ctx.lineWidth = 1;
+  ctx.strokeStyle = '#d0d0d0';
+  ctx.stroke();
+  */
+  ctx.beginPath();
+  ctx.arc(X, Y, ro, 0, 2 * Math.PI, false);
+  ctx.lineWidth = 1;
+  ctx.strokeStyle = '#808080';
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.arc(X, Y, ri, 0, 2 * Math.PI, false);
+  ctx.lineWidth = 1;
+  ctx.strokeStyle = '#808080';
+  ctx.stroke();
+  
+  var x0 = ri;
+  var y0 = ro+ri+40;
+  ctx.beginPath();
+  ctx.lineWidth = 1;
+  ctx.moveTo(ri,Y);
+  ctx.lineTo(x0,y0);
+  ctx.strokeStyle = '#d0d0d0';
+  ctx.stroke();
+  
+  var x1 = time - ro*Math.sin(time/ri)+ri;
+  var y1 = ro*Math.cos(time/ri)+ri+40;
+  ctx.beginPath();
+  ctx.lineWidth = 1;
+  ctx.moveTo(X,Y);
+  ctx.lineTo(x1,y1);
+  ctx.strokeStyle = '#808080';
+  ctx.stroke();
+  /*
+  ctx.beginPath();
+  ctx.arc(X, Y, r3, 0, 2 * Math.PI, false);
+  ctx.lineWidth = 1;
+  ctx.strokeStyle = '#808080';
+  ctx.stroke();
+  */
+  var t = time;
+  while(t>0) {
+ 
+    var x2 = t - r2*Math.sin(t/ri)+ri;
+    var y2 = r2*Math.cos(t/ri)+ri+40;
+    //var x3 = t - r3*Math.sin(t/ri)+ri;
+    // var y3 = r3*Math.cos(t/ri)+ri+40;
+    var x4 = t - r4*Math.sin(t/ri)+ri;
+    var y4 = r4*Math.cos(t/ri)+ri+40;
+  
+    ctx.beginPath();
+    ctx.arc(x2, y2, 1, 0, 2 * Math.PI, false);
+    ctx.lineWidth = 1;
+    ctx.fillStyle = '#FF0000';
+    ctx.fill();
+    /*
+    ctx.beginPath();
+    ctx.arc(x3, y3, 1, 0, 2 * Math.PI, false);
+    ctx.lineWidth = 1;
+    ctx.fillStyle = '#00FF00';
+    ctx.fill();
+    */
+    ctx.beginPath();
+    ctx.arc(x4, y4, 1, 0, 2 * Math.PI, false);
+    ctx.lineWidth = 1;
+    ctx.fillStyle = '#0000FF';
+    ctx.fill();
+  
+    t = t-5;
+  }
+  if(time<1400) {
+    setTimeout(function() {
+      draw(time+5);
+    },  100);}
+  }
+}
+  </script>
+  </html>
